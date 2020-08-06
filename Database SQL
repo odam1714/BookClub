@@ -1,0 +1,182 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+
+-- Database: `library`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Authors`
+--
+
+CREATE TABLE `Authors` (
+  `author_id` int(11) NOT NULL,
+  `first_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `last_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `social_security` int(11) NOT NULL,
+  `birthyear` int(11) NOT NULL,
+  `author_page` varchar(255) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Authors`
+--
+
+INSERT INTO `Authors` (`author_id`, `first_name`, `last_name`, `social_security`, `birthyear`, `author_page`) VALUES
+(147, 'Amanda', 'Odina', 123456789, 1985, 'Here is the page.'),
+(258, 'Sammi', 'Chen', 321654987, 1966, 'Here is the page.'),
+(369, 'Zoe', 'Spoon', 987654321, 1991, 'Here is the page.'),
+(478, 'Troy', 'Bolton', 963852741, 1974, 'Here is the page.'),
+(569, 'Lydia', 'Martin', 741852963, 1976, 'Here is the page.'),
+(632, 'Onika', 'Maraj', 852741963, 1932, 'Here is the page.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Books`
+--
+
+CREATE TABLE `Books` (
+  `book_id` int(11) NOT NULL,
+  `ISBN` int(11) NOT NULL,
+  `book_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `total_pages` int(11) NOT NULL,
+  `edition_number` int(11) NOT NULL,
+  `year_published` int(11) NOT NULL,
+  `unique_barcode` int(11) NOT NULL,
+  `shelf_id` int(11) NOT NULL,
+  `date_added` int(11) NOT NULL,
+  `publishing_company` varchar(255) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `reserve` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Books`
+--
+
+INSERT INTO `Books` (`book_id`, `ISBN`, `book_title`, `total_pages`, `edition_number`, `year_published`, `unique_barcode`, `shelf_id`, `date_added`, `publishing_company`, `reserve`) VALUES
+(123, 963852741, 'Book One', 145, 4, 2008, 963852741, 963852741, 3142008, 'Amanda\'s Publishing', 0),
+(234, 987654321, 'Book Two', 825, 2, 2009, 987654321, 987654321, 3142009, 'Amanda\'s Publishing', 0),
+(345, 741852963, 'Book Three', 357, 1, 2013, 741852963, 741852963, 3142013, 'Amanda\'s Publishing', 0),
+(456, 753869412, 'Book Four', 564, 3, 2017, 753869412, 753869412, 3142017, 'Amanda\'s Publishing', 0),
+(567, 159263478, 'Book Five', 44, 8, 2001, 159263478, 159263478, 3142001, 'Haus of Publishing', 0),
+(678, 584267913, 'Book Six', 88, 1, 1972, 584267913, 584267913, 3141972, 'Haus of Publishing', 0),
+(789, 357689241, 'Book Seven', 413, 1, 1995, 357689241, 357689241, 3141995, 'Haus of Publishing', 0),
+(890, 654823791, 'Book Eight', 90, 2, 2003, 654823791, 654823791, 3142003, 'Haus of Publishing', 0),
+(901, 456789123, 'Book Nine', 120, 2, 1956, 456789123, 456789123, 3141956, 'Haus of Publishing', 0),
+(991, 852963741, 'Book Ten', 720, 2, 1985, 852963741, 852963741, 3141985, 'Amanda\'s Publishing', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_author`
+--
+
+CREATE TABLE `book_author` (
+  `id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `book_author`
+--
+
+INSERT INTO `book_author` (`id`, `author_id`, `book_id`) VALUES
+(101, 147, 123),
+(201, 234, 258),
+(301, 147, 345),
+(401, 369, 456),
+(501, 478, 567),
+(601, 569, 678),
+(701, 569, 789),
+(801, 632, 890),
+(901, 478, 901),
+(1001, 147, 991);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Gallery`
+--
+
+CREATE TABLE `Gallery` (
+  `imgFile` longtext NOT NULL,
+  `galleryOrder` longtext NOT NULL,
+  `gallery_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Gallery`
+--
+
+INSERT INTO `Gallery` (`imgFile`, `galleryOrder`, `gallery_ID`) VALUES
+('gallery.5ed6722d79fdc0.85853889.jpg', '2', 13),
+('gallery.5ed672312a3bb4.30135025.jpg', '3', 14),
+('gallery.5ed67234af1705.63273921.jpg', '4', 15),
+('gallery.5ed672388cddc2.37170631.jpg', '5', 16),
+('gallery.5ed6723c104f48.79515564.jpg', '6', 17);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Users`
+--
+
+CREATE TABLE `Users` (
+  `user_ID` int(11) NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_swedish_ci NOT NULL,
+  `staff` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Users`
+--
+
+INSERT INTO `Users` (`user_ID`, `username`, `password`, `staff`) VALUES
+(1, 'admin', 'admin', 1),
+(2, 'moderator', 'moderator', 2),
+(36, 'member1', 'member1', 0),
+(48, 'member2', 'member2', 0),
+(51, 'member3', 'member3', 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Authors`
+--
+ALTER TABLE `Authors`
+  ADD PRIMARY KEY (`author_id`);
+
+--
+-- Indexes for table `Books`
+--
+ALTER TABLE `Books`
+  ADD PRIMARY KEY (`book_id`);
+
+--
+-- Indexes for table `Gallery`
+--
+ALTER TABLE `Gallery`
+  ADD PRIMARY KEY (`gallery_ID`);
+
+--
+-- Indexes for table `Users`
+--
+ALTER TABLE `Users`
+  ADD PRIMARY KEY (`user_ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Gallery`
+--
+ALTER TABLE `Gallery`
+  MODIFY `gallery_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
